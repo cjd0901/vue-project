@@ -25,3 +25,5 @@
 + 使用vue-resource的this.$http.get 获取数据
 + 获取到的数据，要保存到 data 上
 + 使用v-for循环渲染每个 轮播图的item项
+
+## 改造mui九宫格的样式
