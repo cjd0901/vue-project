@@ -11,6 +11,8 @@ import router from './router.js'
 import VueResource from 'vue-resource'
 // 2.2 注册vue-resource
 Vue.use(VueResource)
+// 设置请求的根路径
+Vue.http.options.root = 'http://www.liulongbin.top:3005/';
 
 // 导入MUI的样式
 import './lib/mui/css/mui.min.css'

@@ -6,6 +6,7 @@ import HomeContainer from './components/Tabbar/HomeContainer.vue'
 import MemberContainer from './components/Tabbar/MemberContainer.vue'
 import CartContainer from './components/Tabbar/CartContainer.vue'
 import SearchContainer from './components/Tabbar/SearchContainer.vue'
+import NewsList from './components/news/newslist.vue'
 
 //3、创建路由对象
 var router = new VueRouter({
@@ -15,6 +16,7 @@ var router = new VueRouter({
       { path: '/cart', component: CartContainer },
       { path: '/search', component: SearchContainer },
       { path: '/', redirect: '/home' },
+      { path: '/home/newslist', component: NewsList}
     ],
     linkActiveClass: 'mui-active' //覆盖默认的路由高亮类，默认的为router-link-active
 })

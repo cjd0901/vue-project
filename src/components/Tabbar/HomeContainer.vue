@@ -3,25 +3,18 @@
     <!-- 轮播图 -->
     <mt-swipe :auto="4000">
       <!-- 在组件中需要:key -->
-      <!-- <mt-swipe-item v-for="item in lunboList" :key="item.id"> -->
-      <!-- <img src="item.img" alt="item.id"> -->
-      <!-- </mt-swipe-item> -->
-      <mt-swipe-item>
-        <img src="../../images/1.jpg" alt>
+      <mt-swipe-item v-for="item in lunboList" :key="item.img">
+      <img :src="item.img" :alt="item.id">
       </mt-swipe-item>
-      <mt-swipe-item>
-        <img src="../../images/2.jpg" alt>
-      </mt-swipe-item>
-      <mt-swipe-item>3</mt-swipe-item>
     </mt-swipe>
 
     <!-- 六宫格 使用mui代码 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/newslist">
           <img src="../../images/menu1.png" alt>
           <div class="mui-media-body">新闻资讯</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
@@ -66,27 +59,23 @@ import { Toast } from "mint-ui";
 export default {
   data() {
     return {
-      lunboList: [
-        //保存轮播图片的数组
-        { id: 1, img: "./images/1.jpg" },
-        { id: 2, img: "./images/2.jpg" }
-      ]
+      lunboList: []//保存轮播图片的数组
     };
   },
   created() {
-    //this.getLunBo();
+    this.getLunBo();
   },
   methods: {
-    // getLunBo(){
-    //   this.$http.get("").then(result => {
-    //     console.log(result.body);
-    //     if(result.body.status === 0){
-    //       this.lunboList = result.body.message;
-    //     }else {
-    //       Toast('加载轮播图失败')
-    //     }
-    //   })
-    // }
+    getLunBo(){
+      this.$http.get("api/getlunbo").then(result => {
+        //console.log(result.body);
+        if(result.body.status === 0){
+          this.lunboList = result.body.message;
+        }else {
+          Toast('加载轮播图失败')
+        }
+      })
+    }
   }
 };
 </script>
