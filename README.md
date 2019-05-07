@@ -65,3 +65,54 @@
 + 当发表评论完成后，重新刷新列表，以查看最新的评论
 - 如果调用getComments方法重新刷新评论列表的话，可能只能得到最后一页的评论，前几页的评论获取不到
 - 换一种思路：当评论成功后，在客户端，手动拼接出一个最新的评论对象，调用数组的unshift方法，把最新的评论，追加到data中comments的开头，这样就能完美实现刷新评论列表的需求
+
+## 改造图片分享按钮为路由的链接并显示对应的组件页面
+
+## 绘制图片列表 组件页面结构并美化样式
++ 制作顶部滑动条
++ 制作底部的图片列表
+
+### 顶部滑动条
++ 需要使用MUI的 tab-top-webview-main.html的代码
++ 需要去掉slider区域的mui-fullscreen类
++ 滑动条无法正常触发滑动，通过检查发现需要初始化：
+- 导入mui.js
+- 调用官方提供的
+```
+mui('.mui-scroll-wrapper').scroll({
+	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+});
+```
++ 在初始化滑动条的时候，导入mui.js发现报错
+```
+ Uncaught TypeError:  properties may not be accessed on strict mode functions or the arguments objects for calls to them
+```
+- 经过排查，是由mui.js中调用了'caller', 'callee', and 'arguments'，但是，webpack打包好的bundle.js中，默认是严格模式，所以发生了冲突
+- 解决方案：1、把mui.js中的代码修改(不现实) 2、把webpack 严格模式禁用
+- 使用第二种方法：使用插件`babel-plugin-transform-remove-strict-mode`
+,需要在.babelrc引用插件
+`{
+  "plugins": ["transform-remove-strict-mode"]
+}`
+
++ 在谷歌浏览器中，默认不能进行滑动,需要设置样式(使用通配符给全局设置touch-action，作用是用于指定某个给定的区域是否允许用户操作，以及如何响应用户操作)
+```
+* {
+  touch-action: pan-y;
+}
+```
++ 从首页进入图片分享页面的时候，滑动条无法正常工作，经过分析，发现滑动条必须要等DOM元素加载完毕，所以把初始化滑动条的代码，放入monted 钩子函数中去
++ 当滑动条调试好后，发现 Tabbar 无法切换组件，发现mui.js和Tabbar中的类冲突了，解决方案：修改`.mui-tab-item` 类名即可
++ 获取所有分类并渲染分类列表
+
+## 制作图片列表区域
++ 图片列表需要使用懒加载技术，我们可以使用Mint—UI提供现成的组件`lazy-load`
++ 根据`lazy-load`的使用文档，尝试使用
++ 渲染图片列表数据
+
+## 实现 图片列表的懒加载改造和样式美化
+
+## 实现 点击图片片跳转到图片详情页面
++ 在改在li成router-link的时候，需要设置tag属性指定要渲染的标签为li
+
+## 实现详情页面的布局和美化，同时获取数据渲染页面
