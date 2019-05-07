@@ -2,7 +2,7 @@
   <div>
     <ul class="mui-table-view">
       <li v-for="item in newsList" :key="item.id" class="mui-table-view-cell mui-media">
-        <a href="javascript:;">
+        <router-link :to="'/home/newsinfo/' + item.id">
           <img
             class="mui-media-object mui-pull-left"
             :src="item.img_url"
@@ -14,7 +14,7 @@
               <span>点击：{{ item.click }}次</span>
             </p>
           </div>
-        </a>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -46,7 +46,7 @@ export default {
       })
     }
   },
-  filters: {
+  /* filters: {
     dateFormat:function(dateStr){
       var date = new Date(dateStr)
 
@@ -58,7 +58,7 @@ export default {
       var seconds = date.getSeconds().toString().padStart(2, '0')
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`
     }
-  }
+  } */
 };
 </script>
 
