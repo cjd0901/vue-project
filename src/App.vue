@@ -2,7 +2,11 @@
   <div class="app-container">
 
     <!-- 顶部 Header区域 -->
-    <mt-header fixed title="Vue项目 实战"></mt-header>
+    <mt-header fixed title="Vue项目 实战">
+			<span slot="left" v-show="flag" @click="goBack">
+				<mt-button icon="back">返回</mt-button>
+			</span>
+		</mt-header>
 
 
     <!-- 中间路由 router-view区域 -->
@@ -22,7 +26,7 @@
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item-xdd" to="/cart">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span id="badge" class="mui-badge">0</span></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span id="badge" class="mui-badge">{{ $store.getters.getAllCount }}</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item-xdd" to="/search">
@@ -35,7 +39,29 @@
 
 <script>
 export default {
- 
+	data(){
+		return{
+			flag: false
+		}
+	},
+	created(){
+		this.flag = this.$route.path==='/home'? false : true
+	},
+	methods:{
+		// 点击后退
+		goBack(){
+			this.$router.go(-1)
+		}
+	},
+	watch:{
+		'$route.path': function(newVal){
+			if(newVal === '/home'){
+				this.flag = false
+			}else {
+				this.flag = true
+			}
+		}
+	}
 };
 </script>
 
