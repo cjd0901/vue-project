@@ -130,4 +130,18 @@ mui('.mui-scroll-wrapper').scroll({
 + 打开自己的项目中package.json文件，在dev脚本中添加一个 --host 指令，把当前电脑的wifi ip地址，设置为--host指令的值
 + 查看ip，在cmd终端中运行`config`，查看无线网的ip
 
+## 实现点击加入购物车，有小球动画，且适配任何分辨率下的设备
++ 使用方法 element.getBoundingClientRect()函数获取元素相对位置
++ left 获取左边距，top获取右边距
+
+## 购物车页面的改造和渲染
+
+## 使用vuex将购物车的信息进行共享
++ store用来存储共享信息
++ 通过mutation用来操作共享信息
++ 使用getters用来获取store中的信息，但是不能修改store中的数据
+
+## 将购物车信息存入本地 localStorage中，并将购物车中的操作同步至localStorage中
+
+# 完成项目
 
